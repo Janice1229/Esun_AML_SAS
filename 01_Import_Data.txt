@@ -1,0 +1,37 @@
+
+%let path = C:\Janice\Other\競賽\玉山_2022\Data\訓練資料集_first;
+
+%let CCBA = public_train_x_ccba_full_hashed.csv;
+%let CDTX = public_train_x_cdtx0001_full_hashed.csv;
+%let CUST = public_train_x_custinfo_full_hashed.csv;
+%let DP = public_train_x_dp_full_hashed.csv;
+%let REMI = public_train_x_remit1_full_hashed.csv;
+
+%let TARGET_ALT_DT = train_x_alert_date.csv;
+%let TARGET = train_y_answer.csv;
+
+%let VALID_ALT_DT = public_x_alert_date.csv;
+%let VALID = test_y.csv;
+
+
+proc import datafile="&path.\&CCBA." dbms='CSV' out=work.ccba replace;run;
+proc import datafile="&path.\&CDTX." dbms='CSV' out=work.cdtx replace;run;
+proc import datafile="&path.\&CUST." dbms='CSV' out=work.cust replace;run;
+proc import datafile="&path.\&DP."   dbms='CSV' out=work.dp   replace;  run;
+proc import datafile="&path.\&REMI." dbms='CSV' out=work.remi replace;run;
+
+proc import datafile="&path.\&TARGET_ALT_DT." dbms='CSV' out=work.alert_date replace;run;
+proc import datafile="&path.\&TARGET." dbms='CSV' out=work.target replace;run;
+
+proc import datafile="&path.\&VALID." dbms='CSV' out=work.valid replace;run;
+proc import datafile="&path.\&VALID_ALT_DT." dbms='CSV' out=work.valid_alert replace;run;
+/*
+proc contents data=ccba;run; *59075;
+proc contents data=cdtx;run; *1043014;
+proc contents data=cust;run; *25751;
+proc contents data=dp;run; *1969818;
+proc contents data=remi;run; *17167;
+
+proc contents data=alert;run; *1845;
+proc contents data=target;run; *23906;
+*/
